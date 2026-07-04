@@ -68,3 +68,5 @@
 	</array>
 </dict>
 </plist>
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>Konumunuz haritada gösterilecektir.</string>

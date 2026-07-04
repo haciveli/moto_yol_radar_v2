@@ -5,7 +5,6 @@ import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
 
 import '../services/danger_service.dart';
-import '../models/danger_model.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -90,33 +89,25 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FlutterMap(
-        mapController: _mapController,
-        options: MapOptions(
-          initialCenter: _currentLocation,
-          initialZoom: 13,
-          onLongPress: (tapPosition, point) {
-            showModalBottomSheet(
-              context: context,
-              builder: (context) {
-                return DangerBottomSheet(
-                  onSelected: (type, title) {
-                    DangerService.addDanger(
-                      DangerModel(
-                        title: title,
-                        type: type,
-                        location: point,
-                      ),
-                    );
-                    setState(() {});
-                  },
-                );
-              },
-            );
-          },
-        ),
-        children: [
-
+     body: FlutterMap(
+  mapController: _mapController,
+  options: MapOptions(
+    initialCenter: _currentLocation,
+    initialZoom: 13,
+    onLongPress: (tapPosition, point) {
+      showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return DangerBottomSheet(
+            onSelected: (type, title) {
+              Navigator.pop(context);
+            },
+          );
+        },
+      );
+    },
+  ),
+  children: [
           TileLayer(
             urlTemplate:
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
